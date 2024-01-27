@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../Context/AuthContext";
 
 
@@ -9,6 +9,8 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const navigate = useNavigate();
+
 
   const { createUser } = UserAuth();
   const handleSubmit = async (e) => {
@@ -16,6 +18,7 @@ const Signup = () => {
     setError('')
     try {
         await createUser(email, password);
+        navigate("/account")
     } catch (err) {
       setError(err.message)
     }
